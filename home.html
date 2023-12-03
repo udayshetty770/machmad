@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Tracker App</title>
+    <style>
+        body {
+            background-image: url('abcd.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            background-image: url('h2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+            height: 200px;
+            text-align: center;
+        }
+
+        section {
+            display: flex;
+            max-width: 800px;
+            margin: 3em auto; /* Adjusted margin-top for more space */
+            padding: 2em;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(100, 8, 8, 0.1);
+            border-radius: 8px;
+        }
+
+        .features {
+            flex: 1;
+            padding-right: 15px;
+        }
+
+        .features ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .image-container {
+            flex: 1;
+            text-align: right;
+        }
+
+        .image-container img {
+            max-width: 50%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 0.8em 1.5em;
+            text-decoration: none;
+            color: #fff;
+            margin-right: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+            background-color: #444;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #666;
+        }
+
+        
+        h1 {
+    background-color: rgba(51, 51, 51, 0.8);
+    color: #FFA500; /* Change to the desired color (e.g., orange) */
+    padding: 1em;
+    display: inline-block;
+    text-align: left;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    font-style: italic; /* Make the font italic */
+}
+
+
+        h2, h3 {
+            color: #333;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1em 2em;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #45a049;
+        }
+         
+        section h2 {
+    margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+.special-button {
+    display: block; /* Change from inline-block to block */
+    margin: 20px auto; /* Add margin to center the button and create space */
+    padding: 1em 2em;
+    text-decoration: none;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    /* Additional styling for a special hover effect */
+    position: relative;
+    overflow: hidden;
+}
+
+.special-button:hover {
+    background-color: #45a049; /* Change background color on hover */
+    transform: scale(1.1); /* Scale up the button on hover */
+}
+
+.special-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #fff, transparent); /* Gradient overlay on hover */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.special-button:hover::after {
+    opacity: 1; /* Make the gradient overlay visible on hover */
+}
+
+
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div style="text-align: right">
+            <nav>
+                <a href="https://phenomenal-torrone-d36c47.netlify.app/">Home</a>
+                <a href="https://brilliant-fox-73e83b.netlify.app/">About</a>
+                <a href="https://effervescent-taffy-6dfe08.netlify.app/">Services</a>
+            </nav>
+        </div>
+
+        <div style="text-align: left;">
+            <h1>My Plant </h1>
+        </div>
+    </header>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <section>
+        <div class="features">
+            <h2>Features</h2>
+            <br>
+            <br>
+            <ul>
+                <li><h3>Monitor watering schedules</h3></li>
+                <li><h3>Receive reminders for plant care</h3></li>
+                <li><h3>Keep a record of plant growth</h3></li>
+                <li><h3>Identify common plant issues</h3></li>
+                <li><h3>Share your plant achievements with friends</h3></li>
+            </ul>
+        </div>
+
+        <div class="image-container">
+            <!-- Insert your image source here -->
+            <img src="myplant.webp" alt="Image description">
+        </div>
+    </section>
+
+    <section>
+        <h2>More Plants</h2>
+        
+        <a href="https://aesthetic-sfogliatella-2f2d77.netlify.app/" class="special-button">Click me</a>
+       
+    </section>
+
+    <section>
+        <h2>Monitor your Plant</h2>
+        <a href="https://mellifluous-banoffee-b09e4b.netlify.app/" class="special-button">Click me</a>
+    </section>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <footer>
+        <p>© 2023 Bug Crackers. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
