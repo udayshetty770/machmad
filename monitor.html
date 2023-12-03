@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Data Storage</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('abcd.webp') center / cover no-repeat fixed;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .plant-data {
+            margin-bottom: 20px;
+        }
+
+        .share-section {
+            margin-top: 20px;
+        }
+
+        .share-button {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .share-button:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>My Plant Data Storage</h1>
+        
+        <div class="plant-data">
+            <label for="plantName">Plant Name:</label>
+            <input type="text" class="plantName" placeholder="Enter plant name">
+
+            <label for="waterSchedule">Water Schedule:</label>
+            <input type="text" class="waterSchedule" placeholder="Enter plant watering timings">
+
+            <label for="growthRate">Plant Growth Rate:</label>
+            <input type="text" class="growthRate" placeholder="Enter plant growth rate">
+
+            <label for="plantDescription">Plant Description:</label>
+            <textarea class="plantDescription" placeholder="Enter plant description"></textarea>
+        </div>
+
+        <button onclick="savePlantData()">Save Plant Data</button>
+        <button onclick="downloadData()">Download as PDF</button>
+        <button onclick="addPlant()">Add More Plant</button>
+        <button onclick="deletePlant()">Delete Plant</button>
+
+        <div class="share-section">
+            <h2>Share Plant Data</h2>
+            <button class="share-button" onclick="shareData()">Share with Friends</button>
+        </div>
+    </div>
+
+    <script>
+        function savePlantData() {
+            const plantName = document.querySelector('.plantName').value;
+            const waterSchedule = document.querySelector('.waterSchedule').value;
+            const growthRate = document.querySelector('.growthRate').value;
+            const plantDescription = document.querySelector('.plantDescription').value;
+
+            if (plantName && plantDescription) {
+                const plantData = {
+                    name: plantName,
+                    waterSchedule: waterSchedule,
+                    growthRate: growthRate,
+                    description: plantDescription,
+                };
+
+                // Retrieve existing data, parse it, and then push the new data
+                const existingData = JSON.parse(localStorage.getItem('plantData')) || [];
+                existingData.push(plantData);
+                
+                // Save the parsed array back to local storage
+                localStorage.setItem('plantData', JSON.stringify(existingData));
+                
+                alert('Plant data saved successfully!');
+            } else {
+                alert('Please enter both plant name and description.');
+            }
+        }
+
+        function downloadData() {
+            const plantData = localStorage.getItem('plantData');
+
+            if (plantData) {
+                const blob = new Blob([plantData], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'plant_data.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                URL.revokeObjectURL(url);
+            } else {
+                alert('No plant data available to download.');
+            }
+        }
+
+        function addPlant() {
+            const plantDataContainer = document.querySelector('.container');
+            const plantDataDiv = document.createElement('div');
+            plantDataDiv.classList.add('plant-data');
+
+            plantDataDiv.innerHTML = `
+                <label for="plantName">Plant Name:</label>
+                <input type="text" class="plantName" placeholder="Enter plant name">
+
+                <label for="waterSchedule">Water Schedule:</label>
+                <input type="text" class="waterSchedule" placeholder="Enter plant watering timings">
+
+                <label for="growthRate">Plant Growth Rate:</label>
+                <input type="text" class="growthRate" placeholder="Enter plant growth rate">
+
+                <label for="plantDescription">Plant Description:</label>
+                <textarea class="plantDescription" placeholder="Enter plant description">
+                </textarea>
+            `;
+
+            plantDataContainer.insertBefore(plantDataDiv, document.querySelector('button'));
+        }
+
+        function deletePlant() {
+            const plantNameToDelete = prompt('Enter the plant name to delete:');
+            if (plantNameToDelete) {
+                let existingData = JSON.parse(localStorage.getItem('plantData')) || [];
+
+                // Find and remove the plant data with the specified name
+                existingData = existingData.filter(plant => plant.name !== plantNameToDelete);
+
+                // Update local storage with the modified data
+                localStorage.setItem('plantData', JSON.stringify(existingData));
+
+                alert(`Plant data for ${plantNameToDelete} deleted successfully!`);
+            } else {
+                alert('Please enter the plant name to delete.');
+            }
+        }
+
+        function shareData() {
+            const email = prompt('Enter the email address to share with:');
+            if (email) {
+                const plantData = localStorage.getItem('plantData');
+                if (plantData) {
+                    // Replace this with your server-side email sending logic
+                    alert(`Plant data shared with ${email}!`);
+                } else {
+                    alert('No plant data available to share.');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
