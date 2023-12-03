@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Water Schedule</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('abcd.webp') center / cover no-repeat fixed; /* Added 'fixed' for a fixed background */
+        }
+
+        #searchInput {
+            width: 50%;
+            padding: 8px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        #plantContainer {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+            border: 2px solid #555;
+        }
+
+        .plant-block {
+            border: 2px solid #d3bdbd;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .plant-info {
+            flex: 1;
+            text-align: left;
+            margin-right: 20px;
+        }
+
+        img {
+            max-width: 200px;
+            max-height: 200px;
+            display: block;
+            margin: auto;
+        }
+
+        h1 {
+            background-color: rgba(51, 51, 51, 0.8);
+            color: #fff;
+            padding: 1em;
+            display: inline-block;
+            text-align: left;
+            border: 1px solid #fff;
+            border-radius: 5px;
+        }
+
+        body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
+}
+
+footer p {
+  margin: 0;
+}
+
+.license {
+  margin-top: 5px;
+}
+
+
+    </style>
+</head>
+<body>
+
+<h1 style="text-align: center; color: #fff;">Plant care and more</h1>
+
+<!-- Add a search input -->
+<input type="text" id="searchInput" placeholder="Search for a plant..." oninput="filterPlants()">
+
+<div id="plantContainer">
+    <!-- Plant data will be dynamically added here -->
+</div>
+<footer>
+    <div class="container">
+      <p>&copy; 2023 Your Website. All rights reserved.</p>
+      <p class="license">Licensed under the <a href="#">Bug Crackers</a>.</p>
+    </div>
+  </footer>
+
+<script>
+    var plants = [
+    { name: "Mango",
+     schedule: "Every 2 days", 
+     growthRate: "0.5 inches", image: "mango.webp", 
+     description: "The Mango tree (Mangifera indica) is a tropical fruit tree known for its sweet and juicy mangoes. It requires watering every 2 days and has a growth rate of 0.5 inches per day." 
+    },
+        { 
+            name: "Coconut Palm", 
+            schedule: "Every 3 days", 
+            growthRate: "0.3 inches", 
+            image: "coco.jpg", 
+            description: "The Coconut Palm (Cocos nucifera) is an iconic palm tree known for its coconuts and tropical aesthetics. It thrives with a watering schedule every 3 days, growing at a rate of 0.3 inches per day." 
+        },
+
+
+        { name: "Neem", 
+         schedule: "Every 4 days",
+         growthRate: "0.2 inches", image: "neem.jpg", 
+         description: "Neem (Azadirachta indica) is a versatile tree with medicinal properties. It follows a watering schedule every 4 days and has a growth rate of 0.2 inches per day." 
+        },
+        
+        {
+    name: "Paddy",
+    schedule: "Every 5 days",
+    growthRate: "0.4 inches",
+    image: "Paddy.webp",
+    description: "Paddy (Oryza sativa) is a cereal crop cultivated in flooded fields. It requires watering every 5 days and has a growth rate of 0.4 inches per day."
+},
+
+{
+    name: "Areca Palm",
+    schedule: "Every 6 days",
+    growthRate: "0.6 inches",
+    image: "Areca Palm.webp",
+    description: "Areca Palm (Areca catechu) is an ornamental palm tree with feathery fronds. It follows a watering schedule every 6 days and has a growth rate of 0.6 inches per day."
+},
+
+{
+    name: "Banana",
+    schedule: "Every 7 days",
+    growthRate: "0.7 inches",
+    image: "banana.jpg",
+    description: "Banana (Musa spp.) is a tropical fruit-bearing plant. It requires watering every 7 days and has a growth rate of 0.7 inches per day."
+},
+
+{
+    name: "Sandalwood",
+    schedule: "Every 8 days",
+    growthRate: "0.8 inches",
+    image: "sandal.jpg",
+    description: "Sandalwood (Santalum album) is a fragrant tree known for its aromatic heartwood. It follows a watering schedule every 8 days and has a growth rate of 0.8 inches per day."
+},
+
+{
+    name: "Coffee",
+    schedule: "Every 9 days",
+    growthRate: "0.9 inches",
+    image: "coffee.jpg",
+    description: "Coffee (Coffea spp.) is a beverage plant known for its coffee beans. It requires watering every 9 days and has a growth rate of 0.9 inches per day."
+},
+
+{
+    name: "Black Pepper",
+    schedule: "Every 10 days",
+    growthRate: "1.0 inches",
+    image: "Black Pepper.webp",
+    description: "Black Pepper (Piper nigrum) is a spice vine known for its peppercorns. It follows a watering schedule every 10 days and has a growth rate of 1.0 inches per day."
+},
+
+{
+    name: "Betel Leaf",
+    schedule: "Every 11 days",
+    growthRate: "0.5 inches",
+    image: "Betel Leaf.webp",
+    description: "Betel Leaf (Piper betle) is a creeper with aromatic leaves. It requires watering every 11 days and has a growth rate of 0.5 inches per day."
+},
+
+{
+    name: "Rubber Tree",
+    schedule: "Every 12 days",
+    growthRate: "0.4 inches",
+    image: "rubber_tree.jpg",
+    description: "Rubber Tree (Hevea brasiliensis) is a latex-producing tree. It follows a watering schedule every 12 days and has a growth rate of 0.4 inches per day."
+},
+
+{
+    name: "Tamarind",
+    schedule: "Every 13 days",
+    growthRate: "0.3 inches",
+    image: "Tamarind.jpeg",
+    description: "Tamarind (Tamarindus indica) is a tropical tree with sour pods. It requires watering every 13 days and has a growth rate of 0.3 inches per day."
+},
+
+{
+    name: "Jackfruit",
+    schedule: "Every 14 days",
+    growthRate: "0.2 inches",
+    image: "jackfruit.jpg",
+    description: "Jackfruit (Artocarpus heterophyllus) is a large fruit tree. It follows a watering schedule every 14 days and has a growth rate of 0.2 inches per day."
+},
+
+{
+    name: "Guava",
+    schedule: "Every 15 days",
+    growthRate: "0.1 inches",
+    image: "guava.jpg",
+    description: "Guava (Psidium guajava) is a tropical fruit tree. It requires watering every 15 days and has a growth rate of 0.1 inches per day."
+},
+
+{
+    name: "Cashew",
+    schedule: "Every 16 days",
+    growthRate: "0.6 inches",
+    image: "Cashew.webp",
+    description: "Cashew (Anacardium occidentale) is a nut-bearing tree. It follows a watering schedule every 16 days and has a growth rate of 0.6 inches per day."
+},
+
+{
+    name: "Hibiscus",
+    schedule: "Every 17 days",
+    growthRate: "0.7 inches",
+    image: "Hibiscus.webp",
+    description: "Hibiscus (Hibiscus rosa-sinensis) is a flowering shrub with vibrant flowers. It requires watering every 17 days and has a growth rate of 0.7 inches per day."
+},
+
+{
+    name: "Turmeric",
+    schedule: "Every 18 days",
+    growthRate: "0.8 inches",
+    image: "Turmeric.webp",
+    description: "Turmeric (Curcuma longa) is a spice plant known for its rhizomes. It follows a watering schedule every 18 days and has a growth rate of 0.8 inches per day."
+},
+
+{
+    name: "Arecanut",
+    schedule: "Every 19 days",
+    growthRate: "0.9 inches",
+    image: "Arecanut.webp",
+    description: "Arecanut (Areca catechu) is a palm tree with betel nut. It requires watering every 19 days and has a growth rate of 0.9 inches per day."
+},
+
+{
+    name: "Teak",
+    schedule: "Every 20 days",
+    growthRate: "1.0 inches",
+    image: "teak.jpg",
+    description: "Teak (Tectona grandis) is a hardwood tree. It follows a watering schedule every 20 days and has a growth rate of 1.0 inches per day."
+},
+
+{
+    name: "Cardamom",
+    schedule: "Every 21 days",
+    growthRate: "0.5 inches",
+    image: "cardamom.jpg",
+    description: "Cardamom (Elettaria cardamomum) is a spice plant with aromatic seeds. It requires watering every 21 days and has a growth rate of 0.5 inches per day."
+},
+
+{
+    name: "Sugarcane",
+    schedule: "Every 22 days",
+    growthRate: "0.4 inches",
+    image: "Sugarcane.png",
+    description: "Sugarcane (Saccharum officinarum) is a tall grass with sweet stems. It follows a watering schedule every 22 days and has a growth rate of 0.4 inches per day."
+},
+
+{
+    name: "Rose",
+    schedule: "Every 23 days",
+    growthRate: "0.3 inches",
+    image: "rose.jpg",
+    description: "Rose (Rosa spp.) is a flowering plant with fragrant and colorful flowers. It requires watering every 23 days and has a growth rate of 0.3 inches per day."
+},
+
+{
+    name: "Jasmine",
+    schedule: "Every 24 days",
+    growthRate: "0.2 inches",
+    image: "Jasmine.webp",
+    description: "Jasmine (Jasminum spp.) is an aromatic plant with fragrant white flowers. It follows a watering schedule every 24 days and has a growth rate of 0.2 inches per day."
+},
+
+{
+    name: "Marigold",
+    schedule: "Every 25 days",
+    growthRate: "0.1 inches",
+    image: "marigold.jpg",
+    description: "Marigold (Tagetes spp.) is a colorful flower used for decorative purposes. It requires watering every 25 days and has a growth rate of 0.1 inches per day."
+},
+
+        { 
+    name: "Drumstick Tree",
+    schedule: "Every 28 days",
+    growthRate: "0.8 inches",
+    image: "Drumstick _tree.jpg",
+    description: "Drumstick Tree (Moringa oleifera) is a fast-growing, deciduous tree with nutritional and medicinal value. Requiring watering every 28 days and growing at a rate of 0.8 inches per day, it is known for its slender, drumstick-shaped seed pods and nutritious leaves."
+},
+
+{ 
+    name: "Basil",
+    schedule: "Every 29 days",
+    growthRate: "0.9 inches",
+    image: "basil.jpg",
+    description: "Basil (Ocimum basilicum) is a fragrant herb used in culinary and medicinal applications. With a watering schedule every 29 days and a growth rate of 0.9 inches per day, basil is a versatile plant with various cultivars offering unique flavors and aromas."
+},
+
+{ 
+    name: "Papaya",
+    schedule: "Every 30 days",
+    growthRate: "1.0 inches",
+    image: "papaya.jpg",
+    description: "Papaya (Carica papaya) is a tropical fruit tree known for its sweet and juicy orange flesh. Requiring watering every 30 days and growing at a rate of 1.0 inches per day, papaya trees are valued for their delicious fruits and broad, distinctive leaves."
+},
+
+{ 
+    name: "Lemon",
+    schedule: "Every 31 days",
+    growthRate: "0.5 inches",
+    image: "lemon.jpg",
+    description: "Lemon (Citrus limon) is a citrus fruit tree cultivated for its tart, flavorful fruits. With a watering schedule every 31 days and a growth rate of 0.5 inches per day, lemon trees are popular in gardens and orchards for both culinary and ornamental purposes."
+},
+
+{ 
+    name: "Bitter Gourd",
+    schedule: "Every 32 days",
+    growthRate: "0.4 inches",
+    image: "bitter_gourd.jpg",
+    description: "Bitter Gourd (Momordica charantia) is a vining plant known for its distinctive bitter fruits. Requiring watering every 32 days and growing at a rate of 0.4 inches per day, bitter gourd is used in various cuisines and is valued for its potential health benefits."
+},
+
+{ 
+    name: "Brinjal",
+    schedule: "Every 33 days",
+    growthRate: "0.3 inches",
+    image: "brinjal.jpeg",
+    description: "Brinjal (Solanum melongena), also known as eggplant or aubergine, is a versatile vegetable with a rich, purple skin. With a watering schedule every 33 days and a growth rate of 0.3 inches per day, brinjal is widely used in culinary dishes around the world."
+},
+
+{ 
+    name: "Pomegranate",
+    schedule: "Every 34 days",
+    growthRate: "0.2 inches",
+    image: "Pomegranate.webp",
+    description: "Pomegranate (Punica granatum) is a deciduous fruit-bearing shrub or small tree. Requiring watering every 34 days and growing at a rate of 0.2 inches per day, pomegranate is known for its ruby-red, jewel-like arils and is prized for its sweet-tart flavor."
+},
+
+{ 
+    name: "Rosemary",
+    schedule: "Every 35 days",
+    growthRate: "0.1 inches",
+    image: "rosemary.jpeg",
+    description: "Rosemary (Rosmarinus officinalis) is an aromatic herb with needle-like leaves and a woody fragrance. With a watering schedule every 35 days and a growth rate of 0.1 inches per day, rosemary is used in culinary, medicinal, and ornamental applications."
+},
+
+{ 
+    name: "Lavender",
+    schedule: "Every 36 days",
+    growthRate: "0.6 inches",
+    image: "Lavender.webp",
+    description: "Lavender (Lavandula spp.) is a fragrant herb with distinctive purple flowers. Requiring watering every 36 days and growing at a rate of 0.6 inches per day, lavender is prized for its calming aroma and is often used in aromatherapy, cosmetics, and culinary creations."
+},
+
+{ 
+    name: "Sunflower",
+    schedule: "Every 37 days",
+    growthRate: "0.7 inches",
+    image: "sunflower.jpg",
+    description: "Sunflower (Helianthus annuus) is an iconic flower known for its large, yellow blooms. With a watering schedule every 37 days and a growth rate of 0.7 inches per day, sunflowers are cultivated for their beauty and for producing seeds commonly used as snacks or in cooking."
+},
+        { name: "Chilli", 
+        schedule: "Every 38 days",
+         growthRate: "0.8 inches", image: "chilli.jpg", 
+         description: "Chilli (Capsicum spp.) is a spicy fruit used in various cuisines. It follows a watering schedule every 38 days and has a growth rate of 0.8 inches per day."
+         },
+
+
+        { name: "Cabbage",
+         schedule: "Every 39 days", 
+         growthRate: "0.9 inches", image: "cabbage.jpg",
+          description: "Cabbage (Brassica oleracea) is a leafy green vegetable with tightly packed leaves. It requires watering every 39 days and has a growth rate of 0.9 inches per day." },
+        
+        
+          { name: "Pineapple", schedule: "Every 40 days", 
+        growthRate: "1.0 inches", 
+        image: "pineapple.jpg",
+         description: "Pineapple (Ananas comosus) is a tropical fruit with a sweet and tangy taste. It follows a watering schedule every 40 days and has a growth rate of 1.0 inches per day." },
+        // Add similar descriptions for other plants
+
+        // ...
+    ];
+
+    function populateContainer(plantsToDisplay) {
+        var plantContainer = document.getElementById("plantContainer");
+        plantContainer.innerHTML = ''; // Clear existing content
+
+        plantsToDisplay.forEach(function (plant) {
+            var plantBlock = document.createElement("div");
+            plantBlock.className = "plant-block";
+
+            var plantInfo = document.createElement("div");
+            plantInfo.className = "plant-info";
+            plantInfo.innerHTML = `
+                <h3>${plant.name}</h3>
+                <p><strong>Water Schedule:</strong> ${plant.schedule}</p>
+                <p><strong>Growth Rate per Day:</strong> ${plant.growthRate}</p>
+                <p><strong>Description:</strong> ${plant.description}</p>
+            `;
+            plantBlock.appendChild(plantInfo);
+
+            var img = document.createElement("img");
+            img.src = plant.image;
+            img.alt = plant.name;
+            plantBlock.appendChild(img);
+
+            plantContainer.appendChild(plantBlock);
+        });
+    }
+
+    function filterPlants() {
+        var searchTerm = document.getElementById("searchInput").value.toLowerCase();
+        var filteredPlants = plants.filter(function (plant) {
+            return plant.name.toLowerCase().includes(searchTerm);
+        });
+
+        populateContainer(filteredPlants);
+    }
+
+    // Call the function to populate the container with all plants initially
+    populateContainer(plants);
+</script>
+
+</body>
+</html>
